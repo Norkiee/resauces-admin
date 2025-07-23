@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import ogs from "open-graph-scraper";
-import type { OpenGraphScraperSuccess } from "open-graph-scraper";
+
 
 export const dynamic = "force-dynamic"; // optional: ensures fresh scraping
 
