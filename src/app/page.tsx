@@ -79,10 +79,20 @@ export default function UploadPage() {
           ? { title, link, meta_image: image, category }
           : { title, link, image };
 
-      const { error } = await supabase.from(table).insert(payload);
-      if (error) throw error;
+      const { data, error } = await supabase.from(table).insert(payload);
+
+      if (error) {
+        console.error("Supabase Insert Error:", error.message, error.details);
+        setStatus(`Upload failed: ${error.message}`);
+        return;
+      }
+
+      console.log("Inserted Data:", data);
       setStatus("Uploaded successfully!");
-      setLink(""); setTitle(""); setImage(""); setCategory("");
+      setLink("");
+      setTitle("");
+      setImage("");
+      setCategory("");
     } catch (err) {
       console.error(err);
       setStatus("Upload failed");
